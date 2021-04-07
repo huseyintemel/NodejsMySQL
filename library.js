@@ -32,8 +32,9 @@ app.get('/kitaplar',(req, res) => {
 
 //showing selected book
 app.get('/kitaplar/:id',(req, res) => {
-    let sql = "SELECT * FROM kitaplar WHERE kitap_id="+req.params.id;
-    let query = baglanti.query(sql, (err, results) => {
+    let kitap_id = req.params.id;
+    let sql = "SELECT * FROM kitaplar WHERE kitap_id = ? ";
+    let query = baglanti.query(sql,[kitap_id],(err, results) => {
         if(err) throw err;
         res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
     });
@@ -51,8 +52,9 @@ app.post('/kitaplar',(req, res) => {
 
 //updating a book
 app.put('/kitaplar/:id',(req, res) => {
-    let sql = "UPDATE kitaplar SET kitapismi='"+req.body.kitapismi+"', tur='"+req.body.tur+"', yıl='"+req.body.yıl+"', fiyat='"+req.body.fiyat+"' WHERE kitap_id="+req.params.id;
-    let query = baglanti.query(sql, (err, results) => {
+    let kitap_id = req.params.id;
+    let sql = "UPDATE kitaplar SET kitapismi='"+req.body.kitapismi+"', tur='"+req.body.tur+"', yıl='"+req.body.yıl+"', fiyat='"+req.body.fiyat+"' WHERE kitap_id = ?";
+    let query = baglanti.query(sql,[kitap_id],(err, results) => {
         if(err) throw err;
         res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
     });
@@ -60,8 +62,9 @@ app.put('/kitaplar/:id',(req, res) => {
 
 //deleting a book
 app.delete('/kitaplar/:id',(req, res) => {
-    let sql = "DELETE FROM kitaplar WHERE kitap_id="+req.params.id+"";
-    let query = baglanti.query(sql, (err, results) => {
+    let kitap_id = req.params.id;
+    let sql = "DELETE FROM kitaplar WHERE kitap_id = ?";
+    let query = baglanti.query(sql,[kitap_id],(err, results) => {
         if(err) throw err;
         res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
     });
@@ -78,8 +81,9 @@ app.get('/yazarlar',(req, res) => {
 
 //showing selected author
 app.get('/yazarlar/:id',(req, res) => {
-    let sql = "SELECT * FROM yazarlar WHERE yazar_id="+req.params.id;
-    let query = baglanti.query(sql, (err, results) => {
+    let yazar_id = req.params.id;
+    let sql = "SELECT * FROM yazarlar WHERE yazar_id = ?";
+    let query = baglanti.query(sql,[yazar_id],(err, results) => {
         if(err) throw err;
         res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
     });
@@ -98,8 +102,9 @@ app.post('/yazarlar',(req, res) => {
 
 //updating a author
 app.put('/yazarlar/:id',(req, res) => {
-    let sql = "UPDATE yazarlar SET yazarisim='"+req.body.yazarisim+"', dogumtarihi='"+req.body.dogumtarihi+"', cinsiyet='"+req.body.cinsiyet+"' WHERE yazar_id="+req.params.id;
-    let query = baglanti.query(sql, (err, results) => {
+    let yazar_id = req.params.id;
+    let sql = "UPDATE yazarlar SET yazarisim='"+req.body.yazarisim+"', dogumtarihi='"+req.body.dogumtarihi+"', cinsiyet='"+req.body.cinsiyet+"' WHERE yazar_id = ?";
+    let query = baglanti.query(sql,[yazar_id],(err, results) => {
         if(err) throw err;
         res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
     });
@@ -107,8 +112,9 @@ app.put('/yazarlar/:id',(req, res) => {
 
 //deleting a author
 app.delete('/yazarlar/:id',(req, res) => {
-    let sql = "DELETE FROM yazarlar WHERE yazar_id="+req.params.id+"";
-    let query = baglanti.query(sql, (err, results) => {
+    let yazar_id = req.params.id;
+    let sql = "DELETE FROM yazarlar WHERE yazar_id = ?";
+    let query = baglanti.query(sql,[yazar_id],(err, results) => {
         if(err) throw err;
         res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
     });

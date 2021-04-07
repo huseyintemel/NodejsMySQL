@@ -32,8 +32,9 @@ app.get('/sales',(req, res) => {
 
 // showing selected sale
 app.get('/sales/:id',(req, res) => {
-    let sql = "SELECT * FROM sales WHERE purchase_number="+req.params.id;
-    let query = baglanti.query(sql, (err, results) => {
+    let purchase_number = req.params.id;
+    let sql = "SELECT * FROM sales WHERE purchase_number = ?";
+    let query = baglanti.query(sql,[purchase_number], (err, results) => {
         if(err) throw err;
         res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
     });
@@ -51,8 +52,9 @@ app.post('/sales',(req, res) => {
 
 //deleting a sale
 app.delete('/sales/:id',(req, res) => {
-    let sql = "DELETE FROM sales WHERE purchase_number="+req.params.id+"";
-    let query = baglanti.query(sql, (err, results) => {
+    let purchase_number = req.params.id;
+    let sql = "DELETE FROM sales WHERE purchase_number = ?";
+    let query = baglanti.query(sql,[purchase_number],(err, results) => {
         if(err) throw err;
         res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
     });
